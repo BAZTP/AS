@@ -64,7 +64,7 @@ export const History: React.FC = () => {
               {/* Event card */}
               <Card 
                 className="hover:border-blue-500/40 cursor-pointer transition-all hover:shadow-md"
-                onClick={() => navigate(`/cotizaciones/${q.id}`)}
+                onClick={() => navigate(`/admin/cotizaciones/${q.id}`)}
               >
                 <CardContent className="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="space-y-1">

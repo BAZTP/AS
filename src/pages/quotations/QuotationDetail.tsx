@@ -46,7 +46,7 @@ export const QuotationDetail: React.FC = () => {
       setQuotation(q);
     } else {
       showError('Cotización no encontrada.');
-      navigate('/cotizaciones');
+      navigate('/admin/cotizaciones');
     }
   }, [id, navigate, showError]);
 
@@ -73,7 +73,7 @@ export const QuotationDetail: React.FC = () => {
     const duplicated = storageService.duplicateQuotation(quotation.id);
     if (duplicated) {
       success(`Cotización duplicada con éxito como ${duplicated.number}.`);
-      navigate(`/cotizaciones/${duplicated.id}`);
+      navigate(`/admin/cotizaciones/${duplicated.id}`);
     } else {
       showError('Error al duplicar la cotización.');
     }
@@ -82,7 +82,7 @@ export const QuotationDetail: React.FC = () => {
   const handleDelete = () => {
     storageService.deleteQuotation(quotation.id);
     success(`Cotización ${quotation.number} eliminada.`);
-    navigate('/cotizaciones');
+    navigate('/admin/cotizaciones');
   };
 
   const handleDownloadPdf = () => {
@@ -112,7 +112,7 @@ export const QuotationDetail: React.FC = () => {
       <div className="no-print flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm">
         <div className="flex items-center gap-3">
           <button
-            onClick={() => navigate('/cotizaciones')}
+            onClick={() => navigate('/admin/cotizaciones')}
             className="p-2 rounded-xl text-slate-500 hover:text-slate-800 hover:bg-slate-100 dark:hover:text-slate-200 dark:hover:bg-slate-800 transition-colors"
             title="Volver"
           >
@@ -212,7 +212,7 @@ export const QuotationDetail: React.FC = () => {
           <Button
             size="sm"
             variant="secondary"
-            onClick={() => navigate(`/cotizaciones/editar/${quotation.id}`)}
+            onClick={() => navigate(`/admin/cotizaciones/editar/${quotation.id}`)}
             leftIcon={<Edit className="w-4 h-4" />}
             title="Editar cotización"
           >

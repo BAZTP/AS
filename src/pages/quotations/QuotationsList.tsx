@@ -92,7 +92,7 @@ export const QuotationsList: React.FC = () => {
     if (duplicated) {
       success(`Cotización duplicada con éxito como ${duplicated.number}.`);
       loadQuotations();
-      navigate(`/cotizaciones/${duplicated.id}`);
+      navigate(`/admin/cotizaciones/${duplicated.id}`);
     } else {
       showError('Error al duplicar la cotización.');
     }
@@ -141,7 +141,7 @@ export const QuotationsList: React.FC = () => {
             Administra, filtra, duplica y emite documentos comerciales para tus clientes.
           </p>
         </div>
-        <Button onClick={() => navigate('/cotizaciones/nueva')} leftIcon={<Plus className="w-4 h-4" />}>
+        <Button onClick={() => navigate('/admin/cotizaciones/nueva')} leftIcon={<Plus className="w-4 h-4" />}>
           Nueva Cotización
         </Button>
       </div>
@@ -244,7 +244,7 @@ export const QuotationsList: React.FC = () => {
                 : 'Crea tu primera cotización comercial para un cliente.'}
             </p>
             {!hasActiveFilters && (
-              <Button size="sm" onClick={() => navigate('/cotizaciones/nueva')} leftIcon={<Plus className="w-4 h-4" />}>
+              <Button size="sm" onClick={() => navigate('/admin/cotizaciones/nueva')} leftIcon={<Plus className="w-4 h-4" />}>
                 Crear Primera Cotización
               </Button>
             )}
@@ -274,7 +274,7 @@ export const QuotationsList: React.FC = () => {
                     {/* Number */}
                     <td className="px-5 py-3.5 whitespace-nowrap">
                       <button
-                        onClick={() => navigate(`/cotizaciones/${q.id}`)}
+                        onClick={() => navigate(`/admin/cotizaciones/${q.id}`)}
                         className="font-mono font-bold text-xs text-blue-600 dark:text-cyan-400 hover:underline"
                       >
                         {q.number}
@@ -334,7 +334,7 @@ export const QuotationsList: React.FC = () => {
                     <td className="px-5 py-3.5 text-right whitespace-nowrap">
                       <div className="flex items-center justify-end gap-1">
                         <button
-                          onClick={() => navigate(`/cotizaciones/${q.id}`)}
+                          onClick={() => navigate(`/admin/cotizaciones/${q.id}`)}
                           className="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                           title="Ver detalle"
                         >
@@ -358,7 +358,7 @@ export const QuotationsList: React.FC = () => {
                         </button>
 
                         <button
-                          onClick={() => navigate(`/cotizaciones/editar/${q.id}`)}
+                          onClick={() => navigate(`/admin/cotizaciones/editar/${q.id}`)}
                           className="p-1.5 rounded-lg text-slate-400 hover:text-blue-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                           title="Editar"
                         >

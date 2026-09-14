@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   FileText, 
@@ -11,7 +11,7 @@ import {
   Settings, 
   ShieldCheck,
   X,
-  HardDrive
+  Globe
 } from 'lucide-react';
 import { storageService } from '../../services/storageService';
 
@@ -22,17 +22,18 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const config = storageService.getConfig();
 
   const navItems = [
-    { to: '/', label: 'Dashboard', icon: LayoutDashboard },
-    { to: '/cotizaciones', label: 'Cotizaciones', icon: FileText, exact: true },
-    { to: '/cotizaciones/nueva', label: 'Nueva Cotización', icon: PlusCircle, isHighlight: true },
-    { to: '/productos', label: 'Productos', icon: Package },
-    { to: '/clientes', label: 'Clientes', icon: Users },
-    { to: '/categorias', label: 'Categorías', icon: Tags },
-    { to: '/historial', label: 'Historial', icon: History },
-    { to: '/configuracion', label: 'Configuración', icon: Settings },
+    { to: '/admin', label: 'Dashboard', icon: LayoutDashboard, exact: true },
+    { to: '/admin/cotizaciones', label: 'Cotizaciones', icon: FileText, exact: true },
+    { to: '/admin/cotizaciones/nueva', label: 'Nueva Cotización', icon: PlusCircle, isHighlight: true },
+    { to: '/admin/productos', label: 'Productos & Costos', icon: Package },
+    { to: '/admin/clientes', label: 'Clientes', icon: Users },
+    { to: '/admin/categorias', label: 'Categorías', icon: Tags },
+    { to: '/admin/historial', label: 'Historial', icon: History },
+    { to: '/admin/configuracion', label: 'Configuración', icon: Settings },
   ];
 
   return (
@@ -66,7 +67,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                   COTIZAPRO
                 </span>
                 <p className="text-[10px] uppercase font-semibold text-slate-400 tracking-wider">
-                  CCTV & Tecnología
+                  Panel Administrador
                 </p>
               </div>
             </div>
@@ -79,12 +80,26 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             </button>
           </div>
 
+          {/* Quick jump to Public Store */}
+          <div className="p-3 pb-1">
+            <button
+              onClick={() => {
+                onClose();
+                navigate('/');
+              }}
+              className="w-full flex items-center justify-center gap-2 p-2 rounded-xl text-xs font-semibold bg-blue-50 hover:bg-blue-100 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 dark:hover:bg-blue-900/40 border border-blue-200/60 dark:border-blue-800/40 transition-colors"
+            >
+              <Globe className="w-3.5 h-3.5" />
+              <span>Ver Catálogo de Clientes</span>
+            </button>
+          </div>
+
           {/* Navigation Links */}
-          <nav className="p-3 space-y-1 overflow-y-auto max-h-[calc(100vh-140px)]">
+          <nav className="p-3 space-y-1 overflow-y-auto max-h-[calc(100vh-190px)]">
             {navItems.map(item => {
               const Icon = item.icon;
-              const isActive = item.to === '/' 
-                ? location.pathname === '/' 
+              const isActive = item.exact
+                ? location.pathname === item.to
                 : location.pathname.startsWith(item.to);
 
               if (item.isHighlight) {
@@ -98,7 +113,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                       ${
                         isActive
                           ? 'bg-blue-600 text-white shadow-md shadow-blue-600/25'
-                          : 'bg-blue-50 hover:bg-blue-100 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 dark:hover:bg-blue-900/40 border border-blue-200/60 dark:border-blue-800/40'
+                          : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200'
                       }
                     `}
                   >
@@ -137,7 +152,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
               <div className="flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                 <span className="text-[11px] font-semibold text-slate-700 dark:text-slate-300">
-                  Modo Local Activo
+                  Modo Admin Activo
                 </span>
               </div>
               <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-200/60 dark:bg-slate-700 text-slate-600 dark:text-slate-300">

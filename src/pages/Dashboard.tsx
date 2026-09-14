@@ -164,7 +164,7 @@ export const Dashboard: React.FC = () => {
             Métricas clave de cotizaciones, productos de seguridad electrónica y ventas proyectadas.
           </p>
         </div>
-        <Button onClick={() => navigate('/cotizaciones/nueva')} leftIcon={<Plus className="w-4 h-4" />}>
+        <Button onClick={() => navigate('/admin/cotizaciones/nueva')} leftIcon={<Plus className="w-4 h-4" />}>
           Nueva Cotización
         </Button>
       </div>
@@ -333,7 +333,7 @@ export const Dashboard: React.FC = () => {
               subtitle="Últimas cotizaciones generadas en el sistema"
               action={
                 <button
-                  onClick={() => navigate('/cotizaciones')}
+                  onClick={() => navigate('/admin/cotizaciones')}
                   className="text-xs font-semibold text-blue-600 dark:text-cyan-400 hover:underline flex items-center gap-1"
                 >
                   <span>Ver todas</span>
@@ -345,7 +345,7 @@ export const Dashboard: React.FC = () => {
               {recentQuotations.map(q => (
                 <div
                   key={q.id}
-                  onClick={() => navigate(`/cotizaciones/${q.id}`)}
+                  onClick={() => navigate(`/admin/cotizaciones/${q.id}`)}
                   className="p-4 hover:bg-slate-50 dark:hover:bg-slate-800/40 cursor-pointer transition-colors flex items-center justify-between gap-3"
                 >
                   <div className="space-y-0.5 min-w-0">

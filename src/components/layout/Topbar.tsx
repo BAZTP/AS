@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Menu, Sun, Moon, Plus, Shield } from 'lucide-react';
+import { Menu, Sun, Moon, Plus, Globe, ExternalLink } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import { Button } from '../common/Button';
 import { storageService } from '../../services/storageService';
@@ -17,17 +17,17 @@ export const Topbar: React.FC<TopbarProps> = ({ onToggleSidebar }) => {
 
   const getPageTitle = () => {
     const path = location.pathname;
-    if (path === '/') return 'Dashboard Principal';
-    if (path === '/cotizaciones') return 'Gestión de Cotizaciones';
-    if (path === '/cotizaciones/nueva') return 'Generador de Cotización';
-    if (path.startsWith('/cotizaciones/editar')) return 'Editar Cotización';
-    if (path.startsWith('/cotizaciones/')) return 'Detalle de Cotización';
-    if (path === '/productos') return 'Catálogo de Productos';
-    if (path === '/clientes') return 'Directorio de Clientes';
-    if (path === '/categorias') return 'Categorías de Productos';
-    if (path === '/historial') return 'Historial & Auditoría';
-    if (path === '/configuracion') return 'Configuración del Negocio';
-    return 'CotizaPro';
+    if (path === '/admin' || path === '/admin/') return 'Dashboard Principal';
+    if (path === '/admin/cotizaciones') return 'Gestión de Cotizaciones';
+    if (path === '/admin/cotizaciones/nueva') return 'Generador de Cotización';
+    if (path.startsWith('/admin/cotizaciones/editar')) return 'Editar Cotización';
+    if (path.startsWith('/admin/cotizaciones/')) return 'Detalle de Cotización';
+    if (path === '/admin/productos') return 'Catálogo de Productos & Costos';
+    if (path === '/admin/clientes') return 'Directorio de Clientes';
+    if (path === '/admin/categorias') return 'Categorías de Productos';
+    if (path === '/admin/historial') return 'Historial & Auditoría';
+    if (path === '/admin/configuracion') return 'Configuración del Negocio';
+    return 'Panel de Administración';
   };
 
   return (
@@ -47,18 +47,30 @@ export const Topbar: React.FC<TopbarProps> = ({ onToggleSidebar }) => {
             {getPageTitle()}
           </h1>
           <p className="text-[11px] text-slate-400 hidden sm:block">
-            {config.name} • RUC: {config.taxId}
+            {config.name} • Modo Administrador
           </p>
         </div>
       </div>
 
-      {/* Right side: Quick Action & Theme toggle */}
+      {/* Right side: Public Catalog Link, New Quote & Theme toggle */}
       <div className="flex items-center gap-2.5">
-        {location.pathname !== '/cotizaciones/nueva' && (
+        {/* Button to view Public Customer Catalog */}
+        <Button
+          size="sm"
+          variant="outline"
+          onClick={() => navigate('/')}
+          leftIcon={<Globe className="w-4 h-4 text-blue-500" />}
+          className="hidden sm:inline-flex"
+          title="Ver cómo ven los clientes el catálogo online"
+        >
+          Ver Catálogo Clientes
+        </Button>
+
+        {location.pathname !== '/admin/cotizaciones/nueva' && (
           <Button
             size="sm"
             variant="primary"
-            onClick={() => navigate('/cotizaciones/nueva')}
+            onClick={() => navigate('/admin/cotizaciones/nueva')}
             leftIcon={<Plus className="w-4 h-4" />}
             className="hidden sm:inline-flex shadow-sm"
           >
